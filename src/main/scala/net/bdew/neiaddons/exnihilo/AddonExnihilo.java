@@ -18,7 +18,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.bdew.neiaddons.BaseAddon;
 import net.bdew.neiaddons.NEIAddons;
 
-@Mod(modid = NEIAddons.modId + "|ExNihilo", name = "NEI Addons: Ex Nihilo", version = "NEIADDONS_VER", dependencies = "after:exnihilo")
+@Mod(modid = NEIAddons.modId + "|ExNihilo", name = NEIAddons.modName + ": Ex Nihilo", version = NEIAddons.modVersion, dependencies = "after:exnihilo")
 public class AddonExnihilo extends BaseAddon {
     @Mod.Instance(NEIAddons.modId + "|ExNihilo")
     public static AddonExnihilo instance;

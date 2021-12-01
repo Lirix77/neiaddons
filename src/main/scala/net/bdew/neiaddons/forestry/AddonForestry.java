@@ -23,7 +23,7 @@ import net.bdew.neiaddons.forestry.butterflies.ButterflyHelper;
 import net.bdew.neiaddons.forestry.trees.TreeHelper;
 import net.minecraft.client.resources.I18n;
 
-@Mod(modid = NEIAddons.modId + "|Forestry", name = "NEI Addons: Forestry", version = "NEIADDONS_VER", dependencies = "after:NEIAddons;after:Forestry")
+@Mod(modid = NEIAddons.modId + "|Forestry", name = NEIAddons.modName + ": Forestry", version = NEIAddons.modVersion, dependencies = "after:NEIAddons;after:Forestry")
 public class AddonForestry extends BaseAddon {
     public static boolean showSecret;
     public static boolean addBees;

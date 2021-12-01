@@ -1,9 +1,10 @@
 [
 {
-  "modid": "NEIAddons",
-  "name": "NEI Addons",
+  "modid": "${modId}",
+  "name": "${modName}",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "bdew.net/neiaddons",
   "updateUrl": "",
   "authorList": [
@@ -18,10 +19,11 @@
   ]
 },
 {
-  "modid": "NEIAddons|Forestry",
-  "name": "NEI Addons: Forestry",
+  "modid": "${modId}|Forestry",
+  "name": "${modName}: Forestry",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://bdew.net/neiaddons/",
   "updateUrl": "",
   "authorList": [
@@ -37,10 +39,11 @@
   ]
 },
 {
-  "modid": "NEIAddons|CraftingTables",
-  "name": "NEI Addons: Crafting Tables",
+  "modid": "${modId}|CraftingTables",
+  "name": "${modName}: Crafting Tables",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://bdew.net/neiaddons/",
   "updateUrl": "",
   "authorList": [
@@ -56,10 +59,11 @@
   ]
 },
 {
-  "modid": "NEIAddons|AE",
-  "name": "NEI Addons: Applied Energistics",
+  "modid": "${modId}|AE",
+  "name": "${modName}: Applied Energistics",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://bdew.net/neiaddons/",
   "updateUrl": "",
   "authorList": [
@@ -75,10 +79,11 @@
   ]
 },
 {
-  "modid": "NEIAddons|ExtraBees",
-  "name": "NEI Addons: Extra Bees",
+  "modid": "${modId}|ExtraBees",
+  "name": "${modName}: Extra Bees",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://bdew.net/neiaddons/",
   "updateUrl": "",
   "authorList": [
@@ -94,10 +99,11 @@
   ]
 },
 {
-  "modid": "NEIAddons|MiscPeripherals",
-  "name": "NEI Addons: Misc Peripherals",
+  "modid": "${modId}|MiscPeripherals",
+  "name": "${modName}: Misc Peripherals",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://bdew.net/neiaddons/",
   "updateUrl": "",
   "authorList": [
@@ -113,10 +119,11 @@
   ]
 },
 {
-  "modid": "NEIAddons|ExNihilo",
-  "name": "NEI Addons: Ex Nihilo",
+  "modid": "${modId}|ExNihilo",
+  "name": "${modName}: Ex Nihilo",
   "description": "",
-  "version": "@NEIADDONS_VER@",
+  "version": "${modVersion}",
+  "mcversion": "${minecraftVersion}",
   "url": "http://bdew.net/neiaddons/",
   "updateUrl": "",
   "authorList": [

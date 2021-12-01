@@ -26,10 +26,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod(modid = NEIAddons.modId, name = "NEI Addons", version = "NEIADDONS_VER", dependencies = "after:NotEnoughItems")
+@Mod(modid = NEIAddons.modId, name = NEIAddons.modName, version = NEIAddons.modVersion, dependencies = "after:NotEnoughItems")
 public class NEIAddons {
 
+    public static final String modVersion = "GRADLETOKEN_VERSION";
     public static final String modId = "NEIAddons";
+    public static final String modName = "NEI Addons";
     public static final String channelId = "bdew.neiaddons";
     public static final int netVersion = 1;
 

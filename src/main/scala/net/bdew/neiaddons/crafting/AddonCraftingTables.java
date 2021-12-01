@@ -17,12 +17,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.bdew.neiaddons.BaseAddon;
 import net.bdew.neiaddons.NEIAddons;
 import net.bdew.neiaddons.Utils;
+import net.bdew.neiaddons.api.NEIAddon;
 import net.minecraft.client.gui.inventory.GuiContainer;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Mod(modid = NEIAddons.modId + "|CraftingTables", name = "NEI Addons: Crafting Tables", version = "NEIADDONS_VER", dependencies = "after:NEIAddons")
+@Mod(modid = NEIAddons.modId + "|CraftingTables", name = NEIAddons.modName + ": Crafting Tables", version = NEIAddons.modVersion, dependencies = "after:NEIAddons")
 public class AddonCraftingTables extends BaseAddon {
 
     public static Collection<Class<? extends GuiContainer>> craftingTables;

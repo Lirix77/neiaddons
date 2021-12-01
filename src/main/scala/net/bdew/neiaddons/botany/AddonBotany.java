@@ -21,7 +21,7 @@ import net.bdew.neiaddons.NEIAddons;
 import net.bdew.neiaddons.botany.flowers.FlowerHelper;
 import net.minecraft.client.resources.I18n;
 
-@Mod(modid = NEIAddons.modId + "|Botany", name = "NEI Addons: Botany", version = "NEIADDONS_VER", dependencies = "after:NEIAddons;after:Botany")
+@Mod(modid = NEIAddons.modId + "|Botany", name = NEIAddons.modName + ": Botany", version = NEIAddons.modVersion, dependencies = "after:NEIAddons;after:Botany")
 public class AddonBotany extends BaseAddon {
     public static boolean showFlowerMutations;
     public static boolean loadBlacklisted;

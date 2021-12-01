@@ -25,7 +25,7 @@ import net.minecraft.inventory.Slot;
 
 import java.lang.reflect.Method;
 
-@Mod(modid = NEIAddons.modId + "|AppEng", name = "NEI Addons: Applied Energistics 2", version = "NEIADDONS_VER", dependencies = "after:NEIAddons;after:appliedenergistics2")
+@Mod(modid = NEIAddons.modId + "|AppEng", name = NEIAddons.modName + ": Applied Energistics 2", version = NEIAddons.modVersion, dependencies = "after:NEIAddons;after:appliedenergistics2")
 public class AddonAppeng extends BaseAddon {
 
     @Instance(NEIAddons.modId + "|AppEng")
