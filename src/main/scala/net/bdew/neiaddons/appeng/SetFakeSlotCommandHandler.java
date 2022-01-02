@@ -26,12 +26,10 @@ public class SetFakeSlotCommandHandler implements SubPacketHandler {
             Slot slot = cont.getSlot(slotNum);
             if ((slot != null) && AddonAppeng.clsSlotFake.isInstance(slot) && SlotHelper.isSlotEnabled(slot)) {
                 ItemStack targetStack = slot.getStack();
-                if (null != targetStack) {
-                    if (stack.isItemEqual(targetStack)) {
-                        stack.stackSize = slot.getStack().stackSize + stack.stackSize;
-                        if (stack.stackSize > 127) { // add this check if no patch this in AE encoder
-                            stack.stackSize = 127;
-                        }
+                if (null != targetStack && !data.getBoolean("replace") && stack.isItemEqual(targetStack)) {
+                    stack.stackSize = slot.getStack().stackSize + stack.stackSize;
+                    if (stack.stackSize > 127) { // add this check if no patch this in AE encoder
+                        stack.stackSize = 127;
                     }
                 }
                 slot.putStack(stack);

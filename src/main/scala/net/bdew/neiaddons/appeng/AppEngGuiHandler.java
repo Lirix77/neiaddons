@@ -23,35 +23,39 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class AppEngGuiHandler extends INEIGuiAdapter {
     @Override
-    public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button) {
+    public boolean handleDragNDrop(GuiContainer gui, int mouseX, int mouseY, ItemStack draggedStack, int button) {
         if (AddonAppeng.clsBaseGui.isInstance(gui)) {
-            int slotNum = -1;
-            Slot slot = null;
-            for (int k = 0; k < gui.inventorySlots.inventorySlots.size(); k++) {
-                slot = (Slot) gui.inventorySlots.inventorySlots.get(k);
-                if (isMouseOverSlot(gui, slot, mousex, mousey)) {
-                    slotNum = k;
-                    break;
-                }
-            }
-            if ((slotNum > 0) && (AddonAppeng.clsSlotFake.isInstance(slot)) && SlotHelper.isSlotEnabled(slot)) {
+            final Slot currentSlot = getSlotAtPosition(gui, mouseX, mouseY);
+
+            if (currentSlot != null && AddonAppeng.clsSlotFake.isInstance(currentSlot) && SlotHelper.isSlotEnabled(currentSlot)) {
+
                 if (ClientHandler.enabledCommands.contains(AddonAppeng.setWorkbenchCommand)) {
-                    NBTTagCompound data = new NBTTagCompound();
-                    data.setInteger("slot", slotNum);
-                    NBTTagCompound item = new NBTTagCompound();
-                    draggedStack.writeToNBT(item);
-                    data.setTag("item", item);
-                    PacketHelper.sendToServer(AddonAppeng.setWorkbenchCommand, data);
+                    final ItemStack stack = draggedStack.copy();
+
+                    stack.stackSize = Math.min(stack.stackSize, 127);
+
+                    if (button == 0) { //left
+                        setWorkbenchCommand(currentSlot.slotNumber, stack, true);
+                    } else if (button == 1) { //right
+                        stack.stackSize = 1;
+                        setWorkbenchCommand(currentSlot.slotNumber, stack, false);
+                    } else if (button == 2) { //middle
+                        setWorkbenchCommand(currentSlot.slotNumber, stack, true);
+                        draggedStack.stackSize -= stack.stackSize;
+                    }
+                    
                     return true;
                 } else {
                     Minecraft.getMinecraft().thePlayer.addChatMessage(
                             new ChatComponentTranslation("bdew.neiaddons.noserver").setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED))
                     );
                 }
+
             }
+
         }
 
-        return super.handleDragNDrop(gui, mousex, mousey, draggedStack, button);
+        return super.handleDragNDrop(gui, mouseX, mouseY, draggedStack, button);
     }
 
     private boolean isMouseOverSlot(GuiContainer gui, Slot slot, int mouseX, int mouseY) {
@@ -63,4 +67,31 @@ public class AppEngGuiHandler extends INEIGuiAdapter {
         mouseY -= gui.guiTop;
         return mouseX >= slotX - 1 && mouseX < slotX + slotW + 1 && mouseY >= slotY - 1 && mouseY < slotY + slotH + 1;
     }
+
+    private void setWorkbenchCommand(int slotNum, ItemStack stack, boolean replace)
+    {
+        NBTTagCompound message = new NBTTagCompound();
+        message.setInteger("slot", slotNum);
+        message.setBoolean("replace", replace);
+
+        NBTTagCompound item = new NBTTagCompound();
+        stack.writeToNBT(item);
+        message.setTag("item", item);
+
+        PacketHelper.sendToServer(AddonAppeng.setWorkbenchCommand, message);
+    }
+
+    private Slot getSlotAtPosition(GuiContainer gui, int x, int y)
+	{
+		for (int k = 0; k < gui.inventorySlots.inventorySlots.size(); ++k) {
+			Slot slot = (Slot)gui.inventorySlots.inventorySlots.get(k);
+
+			if (isMouseOverSlot(gui, slot, x, y)) {
+				return slot;
+			}
+		}
+
+		return null;
+	}
+
 }
