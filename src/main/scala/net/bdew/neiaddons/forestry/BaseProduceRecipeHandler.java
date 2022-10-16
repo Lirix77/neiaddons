@@ -11,10 +11,19 @@ package net.bdew.neiaddons.forestry;
 
 import codechicken.nei.NEIClientUtils;
 import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import forestry.api.apiculture.IAlleleBeeSpeciesCustom;
+import forestry.api.apiculture.IJubilanceProvider;
 import forestry.api.genetics.IAlleleSpecies;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.ISpeciesRoot;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import net.bdew.neiaddons.Utils;
 import net.bdew.neiaddons.utils.LabeledPositionedStack;
 import net.minecraft.client.Minecraft;
@@ -22,12 +31,7 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
-import java.util.Map.Entry;
+import net.minecraft.util.EnumChatFormatting;
 
 public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
 
@@ -54,15 +58,25 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
             products = new ArrayList<LabeledPositionedStack>();
 
             int i = 0;
-            for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getProduceFromSpecies(species)).entrySet()) {
+            for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getProduceFromSpecies(species))
+                    .entrySet()) {
                 String label = String.format("%.1f%%", product.getValue() * 100F);
                 products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 8, label, 10));
             }
 
             i = 0;
-            for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getSpecialtyFromSpecies(species)).entrySet()) {
+            for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getSpecialtyFromSpecies(species))
+                    .entrySet()) {
                 String label = String.format("%.1f%%", product.getValue() * 100F);
-                products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 36, label, 10));
+                String jubilance = null;
+                if (species instanceof IAlleleBeeSpeciesCustom) {
+                    IJubilanceProvider provider = ((IAlleleBeeSpeciesCustom) species).getJubilanceProvider();
+                    if (provider != null) jubilance = provider.getDescription();
+                }
+                if (jubilance != null)
+                    products.add(new LabeledPositionedStack(
+                            product.getKey(), 96 + 22 * i++, 36, label, 10, EnumChatFormatting.GRAY + jubilance));
+                else products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 36, label, 10));
             }
         }
 
@@ -118,6 +132,17 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
     }
 
     @Override
+    public List<String> handleItemTooltip(GuiRecipe gui, ItemStack stack, List<String> currenttip, int recipe) {
+        CachedProduceRecipe crecipe = (CachedProduceRecipe) this.arecipes.get(recipe);
+        for (PositionedStack positionedStack : crecipe.getOtherStacks()) {
+            if (stack == positionedStack.item) {
+                currenttip.addAll(((LabeledPositionedStack) positionedStack).getTooltip());
+            }
+        }
+        return currenttip;
+    }
+
+    @Override
     public void loadCraftingRecipes(ItemStack result) {
         if (cache == null) return;
         if (result == null) {
@@ -145,7 +170,8 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
         }
         IIndividual member = speciesRoot.getMember(ingredient);
         if (member == null || member.getGenome() == null || member.getGenome().getPrimary() == null) {
-            AddonForestry.instance.logWarning("Individual or genome is null searching recipe for %s", ingredient.toString());
+            AddonForestry.instance.logWarning(
+                    "Individual or genome is null searching recipe for %s", ingredient.toString());
             return;
         }
         arecipes.add(new CachedProduceRecipe(member.getGenome().getPrimary()));
