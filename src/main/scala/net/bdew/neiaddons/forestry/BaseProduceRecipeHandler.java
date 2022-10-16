@@ -45,7 +45,7 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
 
     public class CachedProduceRecipe extends CachedRecipe {
         private LabeledPositionedStack producer;
-        private ArrayList<LabeledPositionedStack> products;
+        private final ArrayList<LabeledPositionedStack> products;
 
         public CachedProduceRecipe(IAlleleSpecies species) {
             ItemStack producerStack = GeneticsUtils.stackFromSpecies(species, GeneticsUtils.RecipePosition.Producer);
@@ -55,7 +55,7 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
                 producer = new LabeledPositionedStack(producerStack, 22, 19, species.getName(), 13);
             }
 
-            products = new ArrayList<LabeledPositionedStack>();
+            products = new ArrayList<>();
 
             int i = 0;
             for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getProduceFromSpecies(species))
@@ -64,15 +64,16 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
                 products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 8, label, 10));
             }
 
+            String jubilance = null;
+            if (species instanceof IAlleleBeeSpeciesCustom) {
+                IJubilanceProvider provider = ((IAlleleBeeSpeciesCustom) species).getJubilanceProvider();
+                if (provider != null) jubilance = provider.getDescription();
+            }
+
             i = 0;
             for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getSpecialtyFromSpecies(species))
                     .entrySet()) {
                 String label = String.format("%.1f%%", product.getValue() * 100F);
-                String jubilance = null;
-                if (species instanceof IAlleleBeeSpeciesCustom) {
-                    IJubilanceProvider provider = ((IAlleleBeeSpeciesCustom) species).getJubilanceProvider();
-                    if (provider != null) jubilance = provider.getDescription();
-                }
                 if (jubilance != null)
                     products.add(new LabeledPositionedStack(
                             product.getKey(), 96 + 22 * i++, 36, label, 10, EnumChatFormatting.GRAY + jubilance));
@@ -110,6 +111,10 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
                 return null;
             }
         }
+
+        public ArrayList<LabeledPositionedStack> getProducts() {
+            return products;
+        }
     }
 
     @Override
@@ -134,11 +139,8 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
     @Override
     public List<String> handleItemTooltip(GuiRecipe gui, ItemStack stack, List<String> currenttip, int recipe) {
         CachedProduceRecipe crecipe = (CachedProduceRecipe) this.arecipes.get(recipe);
-        for (PositionedStack positionedStack : crecipe.getOtherStacks()) {
-            if (stack == positionedStack.item) {
-                currenttip.addAll(((LabeledPositionedStack) positionedStack).getTooltip());
-            }
-        }
+        for (LabeledPositionedStack positionedStack : crecipe.getProducts())
+            if (stack == positionedStack.item) currenttip.addAll(positionedStack.getTooltip());
         return currenttip;
     }
 
