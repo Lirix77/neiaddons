@@ -1,15 +1,13 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.utils;
 
 import java.util.HashMap;
+
 import net.bdew.neiaddons.api.SubPacketHandler;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.Container;
@@ -19,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
 public class SetRecipeCommandHandler implements SubPacketHandler {
+
     private Class<? extends Container> ContainerClass;
     private Class<? extends Slot> SlotClass;
 

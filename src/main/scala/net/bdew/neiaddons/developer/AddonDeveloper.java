@@ -1,13 +1,13 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.developer;
+
+import net.bdew.neiaddons.BaseAddon;
+import net.bdew.neiaddons.NEIAddons;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,8 +15,6 @@ import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.bdew.neiaddons.BaseAddon;
-import net.bdew.neiaddons.NEIAddons;
 
 @Mod(
         modid = NEIAddons.modId + "|Developer",

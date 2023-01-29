@@ -1,13 +1,19 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.forestry.bees;
+
+import java.util.*;
+
+import net.bdew.neiaddons.Utils;
+import net.bdew.neiaddons.forestry.AddonForestry;
+import net.bdew.neiaddons.forestry.GeneticsUtils;
+import net.bdew.neiaddons.forestry.MutationDumper;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
 import codechicken.nei.api.API;
 import cpw.mods.fml.common.Loader;
@@ -17,13 +23,6 @@ import forestry.api.apiculture.IAlleleBeeSpecies;
 import forestry.api.apiculture.IBeeRoot;
 import forestry.api.genetics.AlleleManager;
 import forestry.api.genetics.IAlleleSpecies;
-import java.util.*;
-import net.bdew.neiaddons.Utils;
-import net.bdew.neiaddons.forestry.AddonForestry;
-import net.bdew.neiaddons.forestry.GeneticsUtils;
-import net.bdew.neiaddons.forestry.MutationDumper;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 public class BeeHelper {
 
@@ -45,7 +44,8 @@ public class BeeHelper {
             API.registerRecipeHandler(breedingRecipeHandler);
             API.registerUsageHandler(breedingRecipeHandler);
             AddonForestry.instance.registerWithNEIPlugins(
-                    breedingRecipeHandler.getRecipeName(), breedingRecipeHandler.getRecipeIdent());
+                    breedingRecipeHandler.getRecipeName(),
+                    breedingRecipeHandler.getRecipeIdent());
         }
 
         if (AddonForestry.showBeeProducts) {
@@ -53,7 +53,8 @@ public class BeeHelper {
             API.registerRecipeHandler(productsRecipeHandler);
             API.registerUsageHandler(productsRecipeHandler);
             AddonForestry.instance.registerWithNEIPlugins(
-                    productsRecipeHandler.getRecipeName(), productsRecipeHandler.getRecipeIdent());
+                    productsRecipeHandler.getRecipeName(),
+                    productsRecipeHandler.getRecipeIdent());
         }
     }
 
@@ -107,7 +108,8 @@ public class BeeHelper {
                     subitems.add(item.getItemDamage());
                     AddonForestry.instance.logInfo(
                             "Registering comb variant for %s: %s",
-                            combItem.getClass().getName(), item.toString());
+                            combItem.getClass().getName(),
+                            item.toString());
                     API.addItemListEntry(item);
                 }
             }

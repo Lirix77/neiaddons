@@ -1,21 +1,13 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.appeng;
 
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.lang.reflect.Method;
+
 import net.bdew.neiaddons.BaseAddon;
 import net.bdew.neiaddons.NEIAddons;
 import net.bdew.neiaddons.Utils;
@@ -23,6 +15,13 @@ import net.bdew.neiaddons.network.ServerHandler;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
+
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(
         modid = NEIAddons.modId + "|AppEng",
@@ -49,7 +48,7 @@ public class AddonAppeng extends BaseAddon {
 
     @Override
     public String[] getDependencies() {
-        return new String[] {"appliedenergistics2"};
+        return new String[] { "appliedenergistics2" };
     }
 
     @Override
@@ -61,16 +60,12 @@ public class AddonAppeng extends BaseAddon {
     @Override
     public void init(Side side) throws Exception {
         try {
-            blackListGuiName = NEIAddons.config
-                    .get(
-                            getName(),
-                            "Blacklist Gui Class Name",
-                            new String[] {
-                                "com.glodblock.github.client.gui.GuiFluidPatternTerminal",
-                                "com.glodblock.github.client.gui.GuiFluidPatternTerminalEx"
-                            },
-                            "These Gui won't have the NEI drag item handler from NEI addon.")
-                    .getStringList();
+            blackListGuiName = NEIAddons.config.get(
+                    getName(),
+                    "Blacklist Gui Class Name",
+                    new String[] { "com.glodblock.github.client.gui.GuiFluidPatternTerminal",
+                            "com.glodblock.github.client.gui.GuiFluidPatternTerminalEx" },
+                    "These Gui won't have the NEI drag item handler from NEI addon.").getStringList();
 
             clsBaseContainer = Utils.getAndCheckClass("appeng.container.AEBaseContainer", Container.class);
             clsSlotFake = Utils.getAndCheckClass("appeng.container.slot.SlotFake", Slot.class);

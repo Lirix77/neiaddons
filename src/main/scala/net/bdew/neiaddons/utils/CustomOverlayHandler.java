@@ -1,9 +1,6 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
@@ -11,16 +8,8 @@ package net.bdew.neiaddons.utils;
 
 import static codechicken.nei.NEIServerUtils.areStacksSameType;
 
-import codechicken.nei.LayoutManager;
-import codechicken.nei.NEIClientUtils;
-import codechicken.nei.OffsetPositioner;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.api.DefaultOverlayRenderer;
-import codechicken.nei.api.IOverlayHandler;
-import codechicken.nei.api.IStackPositioner;
-import codechicken.nei.guihook.GuiContainerManager;
-import codechicken.nei.recipe.IRecipeHandler;
 import java.util.List;
+
 import net.bdew.neiaddons.NEIAddons;
 import net.bdew.neiaddons.network.ClientHandler;
 import net.bdew.neiaddons.network.PacketHelper;
@@ -31,14 +20,25 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
+import codechicken.nei.LayoutManager;
+import codechicken.nei.NEIClientUtils;
+import codechicken.nei.OffsetPositioner;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.api.DefaultOverlayRenderer;
+import codechicken.nei.api.IOverlayHandler;
+import codechicken.nei.api.IStackPositioner;
+import codechicken.nei.guihook.GuiContainerManager;
+import codechicken.nei.recipe.IRecipeHandler;
+
 public class CustomOverlayHandler implements IOverlayHandler {
+
     private boolean invert;
     private String command;
     private int xOffs, yOffs;
     private Class<? extends Slot> craftingSlot;
 
-    public CustomOverlayHandler(
-            String command, int xOffs, int yOffs, boolean invert, Class<? extends Slot> craftingSlot) {
+    public CustomOverlayHandler(String command, int xOffs, int yOffs, boolean invert,
+            Class<? extends Slot> craftingSlot) {
         super();
         this.command = command;
         this.xOffs = xOffs;
@@ -56,7 +56,9 @@ public class CustomOverlayHandler implements IOverlayHandler {
         }
         NEIAddons.logWarning(
                 "Failed to find matching slot - (%d,%d) in %s",
-                pstack.relx + xOffs, pstack.rely + yOffs, cont.toString());
+                pstack.relx + xOffs,
+                pstack.rely + yOffs,
+                cont.toString());
         return null;
     }
 
@@ -122,7 +124,7 @@ public class CustomOverlayHandler implements IOverlayHandler {
             }
             NEIAddons.logInfo("Don't have server support, moving recipe manually");
             GuiContainerManager manager = GuiContainerManager.getManager(cont);
-            //noinspection ConstantConditions
+            // noinspection ConstantConditions
             if (manager != null) {
                 for (Object slotob : cont.inventorySlots.inventorySlots) {
                     if (craftingSlot.isInstance(slotob)) {
@@ -142,7 +144,10 @@ public class CustomOverlayHandler implements IOverlayHandler {
 
                         NEIAddons.logInfo(
                                 "Moving from slot %s[%d] to %s[%d]",
-                                slotFrom.toString(), slotFrom.slotNumber, slotTo.toString(), slotTo.slotNumber);
+                                slotFrom.toString(),
+                                slotFrom.slotNumber,
+                                slotTo.toString(),
+                                slotTo.slotNumber);
 
                         // pick up item
                         manager.handleSlotClick(slotFrom.slotNumber, 0, 0);

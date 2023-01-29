@@ -1,15 +1,11 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.appeng;
 
-import codechicken.nei.api.INEIGuiAdapter;
 import net.bdew.neiaddons.network.ClientHandler;
 import net.bdew.neiaddons.network.PacketHelper;
 import net.minecraft.client.Minecraft;
@@ -21,7 +17,10 @@ import net.minecraft.util.ChatComponentTranslation;
 import net.minecraft.util.ChatStyle;
 import net.minecraft.util.EnumChatFormatting;
 
+import codechicken.nei.api.INEIGuiAdapter;
+
 public class AppEngGuiHandler extends INEIGuiAdapter {
+
     @Override
     public boolean handleDragNDrop(GuiContainer gui, int mouseX, int mouseY, ItemStack draggedStack, int button) {
         if (AddonAppeng.clsBaseGui.isInstance(gui) && !checkBlacklist(gui)) {
@@ -46,9 +45,8 @@ public class AppEngGuiHandler extends INEIGuiAdapter {
 
                     return true;
                 } else {
-                    Minecraft.getMinecraft()
-                            .thePlayer
-                            .addChatMessage(new ChatComponentTranslation("bdew.neiaddons.noserver")
+                    Minecraft.getMinecraft().thePlayer.addChatMessage(
+                            new ChatComponentTranslation("bdew.neiaddons.noserver")
                                     .setChatStyle(new ChatStyle().setColor(EnumChatFormatting.RED)));
                 }
             }

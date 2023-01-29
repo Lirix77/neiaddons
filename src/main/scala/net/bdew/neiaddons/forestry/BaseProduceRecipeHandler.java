@@ -1,13 +1,26 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.forestry;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import net.bdew.neiaddons.Utils;
+import net.bdew.neiaddons.utils.LabeledPositionedStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.resources.I18n;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumChatFormatting;
 
 import codechicken.nei.NEIClientUtils;
 import codechicken.nei.PositionedStack;
@@ -18,20 +31,6 @@ import forestry.api.apiculture.IJubilanceProvider;
 import forestry.api.genetics.IAlleleSpecies;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.ISpeciesRoot;
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import net.bdew.neiaddons.Utils;
-import net.bdew.neiaddons.utils.LabeledPositionedStack;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.resources.I18n;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 
 public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
 
@@ -44,6 +43,7 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
     }
 
     public class CachedProduceRecipe extends CachedRecipe {
+
         private LabeledPositionedStack producer;
         private final ArrayList<LabeledPositionedStack> products;
 
@@ -74,9 +74,14 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
             for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getSpecialtyFromSpecies(species))
                     .entrySet()) {
                 String label = String.format("%.1f%%", product.getValue() * 100F);
-                if (jubilance != null)
-                    products.add(new LabeledPositionedStack(
-                            product.getKey(), 96 + 22 * i++, 36, label, 10, EnumChatFormatting.GRAY + jubilance));
+                if (jubilance != null) products.add(
+                        new LabeledPositionedStack(
+                                product.getKey(),
+                                96 + 22 * i++,
+                                36,
+                                label,
+                                10,
+                                EnumChatFormatting.GRAY + jubilance));
                 else products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 36, label, 10));
             }
         }
@@ -172,8 +177,8 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
         }
         IIndividual member = speciesRoot.getMember(ingredient);
         if (member == null || member.getGenome() == null || member.getGenome().getPrimary() == null) {
-            AddonForestry.instance.logWarning(
-                    "Individual or genome is null searching recipe for %s", ingredient.toString());
+            AddonForestry.instance
+                    .logWarning("Individual or genome is null searching recipe for %s", ingredient.toString());
             return;
         }
         arecipes.add(new CachedProduceRecipe(member.getGenome().getPrimary()));

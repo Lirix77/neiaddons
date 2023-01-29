@@ -1,15 +1,13 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.exnihilo;
 
 import mcp.mobius.waila.api.IWailaRegistrar;
+
 import net.bdew.neiaddons.Utils;
 import net.bdew.neiaddons.exnihilo.waila.BarrelHandler;
 import net.bdew.neiaddons.exnihilo.waila.BeeTrapHandler;
@@ -17,6 +15,7 @@ import net.bdew.neiaddons.exnihilo.waila.CrucibleHandler;
 import net.minecraft.tileentity.TileEntity;
 
 public class WailaHandler {
+
     public static Class<? extends TileEntity> clsTeBarrel;
     public static Class<? extends TileEntity> clsTeCrucible;
     public static Class<? extends TileEntity> clsTeBeeTrap;

@@ -1,22 +1,22 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.developer;
 
-import codechicken.nei.guihook.IContainerTooltipHandler;
 import java.util.List;
+
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 
+import codechicken.nei.guihook.IContainerTooltipHandler;
+
 public class DeveloperGuiHandler implements IContainerTooltipHandler {
+
     @Override
     public List<String> handleTooltip(GuiContainer gui, int x, int y, List<String> tip) {
         int slotNum = -1;
@@ -47,8 +47,8 @@ public class DeveloperGuiHandler implements IContainerTooltipHandler {
     }
 
     @Override
-    public List<String> handleItemTooltip(
-            GuiContainer guiContainer, ItemStack itemStack, int i, int i1, List<String> list) {
+    public List<String> handleItemTooltip(GuiContainer guiContainer, ItemStack itemStack, int i, int i1,
+            List<String> list) {
         return list;
     }
 

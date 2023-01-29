@@ -1,13 +1,17 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons;
+
+import java.util.Map;
+
+import net.bdew.neiaddons.api.NEIAddon;
+
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
@@ -15,10 +19,6 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionParser;
 import cpw.mods.fml.relauncher.Side;
-import java.util.Map;
-import net.bdew.neiaddons.api.NEIAddon;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.Logger;
 
 public abstract class BaseAddon implements NEIAddon {
 
@@ -106,7 +106,8 @@ public abstract class BaseAddon implements NEIAddon {
         if (!req.containsVersion(found)) {
             logInfo(
                     "Version mismatch: %s is required while %s was detected, dependent features will be unavailable",
-                    req.toString(), found.getVersionString());
+                    req.toString(),
+                    found.getVersionString());
             return false;
         }
 

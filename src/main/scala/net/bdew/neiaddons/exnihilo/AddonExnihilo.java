@@ -1,13 +1,13 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.exnihilo;
+
+import net.bdew.neiaddons.BaseAddon;
+import net.bdew.neiaddons.NEIAddons;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -15,8 +15,6 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.bdew.neiaddons.BaseAddon;
-import net.bdew.neiaddons.NEIAddons;
 
 @Mod(
         modid = NEIAddons.modId + "|ExNihilo",
@@ -24,6 +22,7 @@ import net.bdew.neiaddons.NEIAddons;
         version = NEIAddons.modVersion,
         dependencies = "after:exnihilo")
 public class AddonExnihilo extends BaseAddon {
+
     @Mod.Instance(NEIAddons.modId + "|ExNihilo")
     public static AddonExnihilo instance;
 
@@ -39,7 +38,7 @@ public class AddonExnihilo extends BaseAddon {
 
     @Override
     public String[] getDependencies() {
-        return new String[] {"exnihilo", "Waila"};
+        return new String[] { "exnihilo", "Waila" };
     }
 
     @EventHandler

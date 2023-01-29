@@ -1,13 +1,19 @@
 /*
- * Copyright (c) bdew, 2013 - 2015
- * https://github.com/bdew/neiaddons
- *
- * This mod is distributed under the terms of the Minecraft Mod Public
- * License 1.0, or MMPL. Please check the contents of the license located in
+ * Copyright (c) bdew, 2013 - 2015 https://github.com/bdew/neiaddons This mod is distributed under the terms of the
+ * Minecraft Mod Public License 1.0, or MMPL. Please check the contents of the license located in
  * http://bdew.net/minecraft-mod-public-license/
  */
 
 package net.bdew.neiaddons.forestry;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import net.bdew.neiaddons.Utils;
+import net.minecraft.item.ItemStack;
 
 import forestry.api.apiculture.EnumBeeType;
 import forestry.api.apiculture.IAlleleBeeSpecies;
@@ -18,15 +24,9 @@ import forestry.api.arboriculture.ITree;
 import forestry.api.arboriculture.ITreeRoot;
 import forestry.api.genetics.*;
 import forestry.api.lepidopterology.IAlleleButterflySpecies;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import net.bdew.neiaddons.Utils;
-import net.minecraft.item.ItemStack;
 
 public class GeneticsUtils {
+
     public enum RecipePosition {
         Parent1,
         Parent2,
@@ -93,12 +93,9 @@ public class GeneticsUtils {
     @SuppressWarnings("unchecked")
     public static <T> Collection<T> getAllTypedSpecies(Class<? extends T> type, boolean includeBlacklisted) {
         ArrayList<T> list = new ArrayList<T>();
-        for (Entry<String, IAllele> entry :
-                AlleleManager.alleleRegistry.getRegisteredAlleles().entrySet()) {
+        for (Entry<String, IAllele> entry : AlleleManager.alleleRegistry.getRegisteredAlleles().entrySet()) {
             if (type.isInstance(entry.getValue())) {
-                if (includeBlacklisted
-                        || !AlleleManager.alleleRegistry.isBlacklisted(
-                                entry.getValue().getUID())) {
+                if (includeBlacklisted || !AlleleManager.alleleRegistry.isBlacklisted(entry.getValue().getUID())) {
                     list.add((T) entry.getValue());
                 }
             }
@@ -133,7 +130,8 @@ public class GeneticsUtils {
     public static Map<ItemStack, Float> getSpecialtyFromSpecies(IAlleleSpecies species) {
         if (species instanceof IAlleleBeeSpecies) {
             return Utils.sanitizeDrops(
-                    ((IAlleleBeeSpecies) species).getSpecialtyChances(), species.getUID() + " specialty");
+                    ((IAlleleBeeSpecies) species).getSpecialtyChances(),
+                    species.getUID() + " specialty");
         } else if (species instanceof IAlleleTreeSpecies) {
             Map<ItemStack, Float> result = new HashMap<ItemStack, Float>();
             ITreeRoot root = (ITreeRoot) species.getRoot();
