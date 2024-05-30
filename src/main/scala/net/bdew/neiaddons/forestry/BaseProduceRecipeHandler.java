@@ -20,14 +20,11 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumChatFormatting;
 
 import codechicken.nei.NEIClientUtils;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.GuiRecipe;
 import codechicken.nei.recipe.TemplateRecipeHandler;
-import forestry.api.apiculture.IAlleleBeeSpeciesCustom;
-import forestry.api.apiculture.IJubilanceProvider;
 import forestry.api.genetics.IAlleleSpecies;
 import forestry.api.genetics.IIndividual;
 import forestry.api.genetics.ISpeciesRoot;
@@ -64,25 +61,11 @@ public abstract class BaseProduceRecipeHandler extends TemplateRecipeHandler {
                 products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 8, label, 10));
             }
 
-            String jubilance = null;
-            if (species instanceof IAlleleBeeSpeciesCustom) {
-                IJubilanceProvider provider = ((IAlleleBeeSpeciesCustom) species).getJubilanceProvider();
-                if (provider != null) jubilance = provider.getDescription();
-            }
-
             i = 0;
             for (Entry<ItemStack, Float> product : Utils.mergeStacks(GeneticsUtils.getSpecialtyFromSpecies(species))
                     .entrySet()) {
                 String label = String.format("%.1f%%", product.getValue() * 100F);
-                if (jubilance != null) products.add(
-                        new LabeledPositionedStack(
-                                product.getKey(),
-                                96 + 22 * i++,
-                                36,
-                                label,
-                                10,
-                                EnumChatFormatting.GRAY + jubilance));
-                else products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 36, label, 10));
+                products.add(new LabeledPositionedStack(product.getKey(), 96 + 22 * i++, 36, label, 10));
             }
         }
 
