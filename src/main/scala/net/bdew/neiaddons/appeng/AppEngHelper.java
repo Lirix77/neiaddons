@@ -11,6 +11,6 @@ import codechicken.nei.api.API;
 public class AppEngHelper {
 
     public static void init() {
-        API.registerNEIGuiHandler(new AppEngGuiHandler());
+        //API.registerNEIGuiHandler(new AppEngGuiHandler());
     }
 }
